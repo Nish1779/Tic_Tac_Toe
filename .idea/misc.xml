@@ -8,7 +8,7 @@
         <entry key="../TicTacToe/app/src/main/res/layout/activity_main.xml" value="0.21348114013671876" />
         <entry key="../TicTacToe/app/src/main/res/layout/content_main.xml" value="0.30512820512820515" />
         <entry key="../TicTacToe/app/src/main/res/layout/fragment_pastgamelist.xml" value="0.2598958333333333" />
-        <entry key="app/src/main/res/layout/activity_game_board.xml" value="0.218096923828125" />
+        <entry key="app/src/main/res/layout/activity_game_board.xml" value="0.1" />
       </map>
     </option>
   </component>
