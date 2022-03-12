@@ -44,8 +44,6 @@ class Nish_GameModel
         }
         // otherwise itreate over winningCombinations
 
-        
-
     }
 
 }
