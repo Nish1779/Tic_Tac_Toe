@@ -42,8 +42,9 @@ class Nish_GameModel
         {
             return false
         }
-        // otherwise itreate over winningCombinations
+        // otherwise itrate over winningCombinations
 
+        return false
     }
 
 }
