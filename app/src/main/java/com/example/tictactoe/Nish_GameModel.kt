@@ -1,4 +1,6 @@
-package com.example.tictactoe
+package com.example.tictactoe 
+
+import android.content.SharedPreferences
 
 class Nish_GameModel
 {
@@ -6,12 +8,14 @@ class Nish_GameModel
     var whoseTurn = Constants.X
     var whoWon = ""
     var numOfMovesPlayed = 0
+    var lastPlayed = ""
+
 
     // this is the 2D array .... this is how you create 2D array
     val winningcombinations : Array<IntArray> = arrayOf(
         intArrayOf(1, 2, 3),
         intArrayOf(4, 5, 6),
-        intArrayOf(7, 8, 8),
+        intArrayOf(7, 8, 9),
         intArrayOf(1,4,7),
         intArrayOf(2,5,8),
         intArrayOf(3,6,9),
@@ -24,8 +28,9 @@ class Nish_GameModel
     fun processTouch(num: Int) : String {
         numOfMovesPlayed++
         val playingNow = whoseTurn
-        movesPlayed[num] = whoseTurn
-
+        movesPlayed[num] = whoseTurn //next moves
+        lastPlayed = whoseTurn
+        // toggles the value of turn ...whos going to play next
         if (whoseTurn == Constants.X)
         {
             whoseTurn = Constants.O
@@ -43,8 +48,36 @@ class Nish_GameModel
             return false
         }
         // otherwise itrate over winningCombinations
+        //check if any array element in winningcombinmation
+        //has last played in all 3 positions
 
+        for (item in winningcombinations){
+
+            val positions = item as IntArray
+
+            if (movesPlayed[positions[0]] == lastPlayed
+                && movesPlayed[positions[1]] == lastPlayed
+                && movesPlayed[positions[2]] == lastPlayed)
+                    //game is over...!!
+                        whoWon = lastPlayed
+            //saveGame()
+            return true
+        }
+
+
+        if (numOfMovesPlayed == 9)
+        {
+            //game ended in draw
+                //saveGame()
+            return true
+        }
         return false
+    }
+
+    fun saveGame(sharedPref: SharedPreferences)
+    {
+        var numberofgamesplayed =sharedPref.getInt(Constants.NUMBER_OF_GAMES_PLAYED,0)
+        numberofgamesplayed++
     }
 
 }
@@ -55,6 +88,7 @@ class Nish_GameModel
         {
             val X = "X"
             val O = "O"
+            val NUMBER_OF_GAMES_PLAYED = "numberofgamesplayed"
         }
     }
 

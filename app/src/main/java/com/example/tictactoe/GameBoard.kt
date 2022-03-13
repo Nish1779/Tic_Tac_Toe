@@ -1,27 +1,32 @@
 package com.example.tictactoe
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import kotlinx.android.synthetic.main.activity_game_board.*
 
 class GameBoard : AppCompatActivity() {
 
-
     var gamemodel = Nish_GameModel()
+    var gameOver = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_board)
 
         setTitle("New Game ") // change karyu title page nu .....
-    }
 
+
+
+    }
 
 
     fun squareTouched(square: View)
     {
 
-        if ((square as Button).text.length > 0){
+        if ((square as Button).text.length > 0 || gameOver){
             // check kare 6 k X or O 6 k nai em iff hoy to go back )
             return
         }
@@ -41,6 +46,23 @@ class GameBoard : AppCompatActivity() {
 
         val movePlayed = gamemodel.processTouch(squareIndex)
         (square as Button).text = movePlayed
+
+        val gameOver = gamemodel.isGameFinished()
+        if (gameOver){
+            gamemodel.saveGame(this.getPreferences(Context.MODE_PRIVATE))
+            if (gamemodel.whoWon.length >0 )
+            {
+            // display in the text view
+            textView.text = "Game Over - "+gamemodel.lastPlayed+" Won!!"
+            }else
+            {
+                textView.text = "Draw !"
+            }
+        }
+        else
+        {
+            textView.text = gamemodel.whoseTurn+ "'s Turn"
+        }
 
     }
 
