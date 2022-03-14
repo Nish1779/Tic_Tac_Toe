@@ -46,6 +46,12 @@ class PastGameListFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
+
+                // to get the data in list
+
+                val shareprefs = activity?.getPreferences(Context.MODE_PRIVATE)  // to get the access of shered prefs
+                PastGameListData.loadPastGameData(shareprefs!!)
+
                 adapter = PastGameListRecyclerViewAdapter(PastGameListData.ITEMS, listener)
             }
         }

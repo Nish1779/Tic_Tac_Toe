@@ -1,6 +1,8 @@
-package com.example.tictactoe 
+package com.example.tictactoe
 
 import android.content.SharedPreferences
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class Nish_GameModel
 {
@@ -9,6 +11,7 @@ class Nish_GameModel
     var whoWon = ""
     var numOfMovesPlayed = 0
     var lastPlayed = ""
+    var orderOfMovesPlayed = " "
 
 
     // this is the 2D array .... this is how you create 2D array
@@ -26,6 +29,7 @@ class Nish_GameModel
     // initialize winning Combination 2D array
 
     fun processTouch(num: Int) : String {
+        orderOfMovesPlayed += num.toString() + ","
         numOfMovesPlayed++
         val playingNow = whoseTurn
         movesPlayed[num] = whoseTurn //next moves
@@ -78,6 +82,20 @@ class Nish_GameModel
     {
         var numberofgamesplayed =sharedPref.getInt(Constants.NUMBER_OF_GAMES_PLAYED,0)
         numberofgamesplayed++
+
+        with(sharedPref.edit()){
+            putInt(Constants.NUMBER_OF_GAMES_PLAYED,numberofgamesplayed)
+            putString(Constants.GAME_RESULT + numberofgamesplayed, whoWon)
+
+            // added time and date....
+            val dateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("M/d/y H:m:ss"))
+            putString(Constants.DATE_TIME + numberofgamesplayed, dateTime)
+
+            putString(Constants.OREDERS_OF_MOVES + numberofgamesplayed, orderOfMovesPlayed)
+
+            apply() //commit()
+
+        }
     }
 
 }
@@ -89,6 +107,9 @@ class Nish_GameModel
             val X = "X"
             val O = "O"
             val NUMBER_OF_GAMES_PLAYED = "numberofgamesplayed"
+            val GAME_RESULT = "gameResult"
+            val DATE_TIME = "dateTime"
+            val OREDERS_OF_MOVES = "oredersOfMoves"
         }
     }
 

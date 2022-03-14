@@ -48,13 +48,15 @@ class GameBoard : AppCompatActivity() {
         (square as Button).text = movePlayed
 
         val gameOver = gamemodel.isGameFinished()
-        if (gameOver){
+        if (gameOver)
+        {
             gamemodel.saveGame(this.getPreferences(Context.MODE_PRIVATE))
             if (gamemodel.whoWon.length >0 )
             {
             // display in the text view
             textView.text = "Game Over - "+gamemodel.lastPlayed+" Won!!"
-            }else
+            }
+            else
             {
                 textView.text = "Draw !"
             }
