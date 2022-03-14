@@ -43,8 +43,16 @@ class PastGameListRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mValues[position]
         holder.mIdView.text = item.id
-        holder.mContentView.text = item.who_won
-        // to show the timestamp
+
+        if (item.who_won.equals("X") || item.who_won.equals("O")) {
+            holder.mContentView.text = item.who_won + "Won!"
+        }
+        else
+        {
+            holder.mContentView.text = "Draw  ..."
+        }
+
+            // to show the timestamp
         holder.mDateTime.text = item.timestamp
 
         with(holder.mView) {

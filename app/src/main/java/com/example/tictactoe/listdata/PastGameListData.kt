@@ -24,7 +24,7 @@ object PastGameListData {
      */
     val ITEM_MAP: MutableMap<String, PastGame> = HashMap()
 
-    private var COUNT = 0
+    private var COUNT = 1
 
 //    init {
 //        // Add some sample items.
@@ -37,7 +37,9 @@ object PastGameListData {
     {
         COUNT = sharedPrefs.getInt(Constants.NUMBER_OF_GAMES_PLAYED, 0)
 
-        for (i in 1..COUNT){
+        for (i in 1..COUNT)
+        {
+
             val gameResult = sharedPrefs.getString(Constants.GAME_RESULT + i, "Error")
             val dateTime = sharedPrefs.getString(Constants.DATE_TIME + i, "Error")
             val orderOfMoves = sharedPrefs.getString(Constants.OREDERS_OF_MOVES + i, "")

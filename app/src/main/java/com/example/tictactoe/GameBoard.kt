@@ -50,7 +50,7 @@ class GameBoard : AppCompatActivity() {
         val gameOver = gamemodel.isGameFinished()
         if (gameOver)
         {
-            gamemodel.saveGame(this.getPreferences(Context.MODE_PRIVATE))
+            gamemodel.saveGame(this.getSharedPreferences("gameData", Context.MODE_PRIVATE))
             if (gamemodel.whoWon.length >0 )
             {
             // display in the text view
