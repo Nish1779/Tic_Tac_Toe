@@ -12,12 +12,38 @@ class GameBoard : AppCompatActivity() {
     var gamemodel = Nish_GameModel()
     var gameOver = false
 
+    var isPastGame = false
+    var pastGameMoves = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_board)
 
-        setTitle("New Game ") // change karyu title page nu .....
 
+        if (intent.getBooleanExtra(Constants.IS_PAST_GAME, false))
+        {
+            pastGameMoves = intent.getStringExtra(Constants.OREDERS_OF_MOVES)!!
+
+            setTitle("Past Game")
+
+            var moves = pastGameMoves.split(",")
+            for (i in moves) {
+                if (i.length > 0) {
+                    val buttonNumber = " button" + i
+                    // findviewbyID<View> (R.id....
+                    var button = findViewById<View>(
+                        resources.getIdentifier(
+                            buttonNumber,
+                            "id",
+                            this.packageName
+                        )
+                    )
+                    squareTouched(button)
+                }
+            }
+        }else {
+            setTitle("New Game ") // change karyu title page nu .....
+        }
 
 
     }
@@ -51,7 +77,7 @@ class GameBoard : AppCompatActivity() {
         if (gameOver)
         {
             gamemodel.saveGame(this.getSharedPreferences("gameData", Context.MODE_PRIVATE))
-            if (gamemodel.whoWon.length >0 )
+            if (gamemodel.whoWon.length > 0 )
             {
             // display in the text view
             textView.text = "Game Over - "+gamemodel.lastPlayed+" Won!!"

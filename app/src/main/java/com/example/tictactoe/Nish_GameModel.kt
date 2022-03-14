@@ -110,6 +110,8 @@ class Nish_GameModel
             val GAME_RESULT = "gameResult"
             val DATE_TIME = "dateTime"
             val OREDERS_OF_MOVES = "oredersOfMoves"
+
+            val IS_PAST_GAME = "isPastGame"
         }
     }
 

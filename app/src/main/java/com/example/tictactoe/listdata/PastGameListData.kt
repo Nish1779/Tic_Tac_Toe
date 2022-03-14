@@ -24,7 +24,7 @@ object PastGameListData {
      */
     val ITEM_MAP: MutableMap<String, PastGame> = HashMap()
 
-    private var COUNT = 1
+    private var COUNT = 0
 
 //    init {
 //        // Add some sample items.

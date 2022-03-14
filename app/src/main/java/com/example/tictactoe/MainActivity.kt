@@ -44,6 +44,12 @@ class MainActivity : AppCompatActivity() , PastGameListFragment.OnListFragmentIn
     }
 
     override fun onListFragmentInteraction(item: PastGameListData.PastGame?) {
-        TODO("Not yet implemented")
+       // TODO("Not yet implemented")
+
+        val intent = Intent(this,GameBoard::class.java)
+        intent.putExtra(Constants.IS_PAST_GAME, true)
+        intent.putExtra(Constants.OREDERS_OF_MOVES, item!!.orderOfMoves)
+        startActivity(intent)
+
     }
 }
