@@ -3,6 +3,7 @@ package com.example.tictactoe
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import android.widget.Button
 import kotlinx.android.synthetic.main.activity_game_board.*
@@ -27,9 +28,12 @@ class GameBoard : AppCompatActivity() {
             setTitle("Past Game")
 
             var moves = pastGameMoves.split(",")
+            var count:Long = 0
             for (i in moves) {
-                if (i.length > 0) {
-                    val buttonNumber = " button" + i
+                if (i.length > 0)
+                {
+                    count++
+                    val buttonNumber = "button" + i
                     // findviewbyID<View> (R.id....
                     var button = findViewById<View>(
                         resources.getIdentifier(
@@ -38,14 +42,16 @@ class GameBoard : AppCompatActivity() {
                             this.packageName
                         )
                     )
-                    squareTouched(button)
+                    // call with a delay ...
+                    Handler().postDelayed({
+                        squareTouched(button)
+                    },500 * count)
                 }
             }
-        }else {
+        }
+        else {
             setTitle("New Game ") // change karyu title page nu .....
         }
-
-
     }
 
 
